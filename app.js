@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const db = require("./database/config");
 const authRoutes = require("./routes/auth");
+const notesRoutes = require("./routes/notes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/notes", notesRoutes);
 
 db.getConnection()
   .then((result) => {
