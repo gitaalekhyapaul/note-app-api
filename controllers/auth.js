@@ -21,10 +21,17 @@ exports.postSignup = async (req, res) => {
       status: "OK",
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      status: "ERROR",
-      error: "Internal Server Error.",
-    });
+    if (err.code === "ER_DUP_ENTRY") {
+      res.status(400).json({
+        status: "ERROR",
+        error: "Username exists.",
+      });
+    } else {
+      console.log(err);
+      res.status(500).json({
+        status: "ERROR",
+        error: "Internal Server Error.",
+      });
+    }
   }
 };
