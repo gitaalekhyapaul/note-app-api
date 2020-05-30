@@ -4,16 +4,16 @@
 
 ### Un-authenticated Routes:
 
-- [**/api/auth/signup**]() **=> POST Route to Signup New Users**
-- [**/api/auth/login**]() **=> POST Route to Login**
+- [**/api/auth/signup**](#1-apiauthsignup--post-route) **=> POST Route to Signup New Users**
+- [**/api/auth/login**](#2-apiauthlogin--post-route) **=> POST Route to Login**
 
-### Authenticated Routes (Requires Auth Headers as mentioned [here]()):
+### Authenticated Routes (Requires Auth Headers as mentioned [here](#authenticated-routes)):
 
-- [**/api/notes/add**]() **=> POST Route to Add New Notes**
-- [**/api/notes/getAll**]() **=> GET Route to get all Notes created by that User**
-- [**/api/notes/get?id=[Note ID]**]() **=> GET Route to get details of a certain Note**
-- [**/api/notes/update**]() **=> POST Route to Update a Note**
-- [**/api/notes/delete**]() **=> POST Route to Delete a Note**
+- [**/api/notes/add**](#1-apinotesadd--post-route) **=> POST Route to Add New Notes**
+- [**/api/notes/getAll**](#2-apinotesgetall--get-route) **=> GET Route to get all Notes created by that User**
+- [**/api/notes/get?id=[Note ID]**](#3-apinotesgetidnote-id--get-route) **=> GET Route to get details of a certain Note**
+- [**/api/notes/update**](#4-apinotesupdate--post-route) **=> POST Route to Update a Note**
+- [**/api/notes/delete**](#5-apinotesdelete--post-route) **=> POST Route to Delete a Note**
 
 ---
 
@@ -211,7 +211,7 @@
 
 ---
 
-### **4. /api/notes/delete => POST Route**
+### **5. /api/notes/delete => POST Route**
 
 **_Parameters:_**
 |Parameter Name|Required|Type|
