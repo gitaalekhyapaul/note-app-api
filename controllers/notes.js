@@ -107,3 +107,51 @@ exports.getNote = async (req, res) => {
     });
   }
 };
+
+exports.postUpdateNote = async (req, res) => {
+  try {
+    const noteId = req.body.id;
+    const updatedTitle = req.body.title;
+    const updatedContent = req.body.content;
+    if (!noteId || !updatedTitle || !updatedContent) {
+      return res.status(400).json({
+        status: "ERROR",
+        error: "Bad Request. Invalid Parameters.",
+      });
+    }
+    const query = await db.execute(
+      `
+    UPDATE notes
+    SET title = ?,
+      content = ?,
+      edited = 1
+    WHERE id = ? AND user_id = ?
+    `,
+      [updatedTitle, updatedContent, noteId, res.locals.user.id]
+    );
+    const result = query[0].affectedRows;
+    if (!result) {
+      return res.status(404).json({
+        status: "ERROR",
+        error: "No Notes Found.",
+      });
+    }
+    res.status(200).json({
+      status: "OK",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "ERROR",
+      error: "Internal Server Error.",
+    });
+  }
+};
+
+exports.postDeleteNote = (req, res) => {
+  try {
+    res.send("OK BRO");
+  } catch (err) {
+    console.log(err);
+  }
+};
