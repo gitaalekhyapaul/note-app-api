@@ -148,10 +148,37 @@ exports.postUpdateNote = async (req, res) => {
   }
 };
 
-exports.postDeleteNote = (req, res) => {
+exports.postDeleteNote = async (req, res) => {
   try {
-    res.send("OK BRO");
+    const noteId = req.body.id;
+    if (!noteId) {
+      return res.status(400).json({
+        status: "ERROR",
+        error: "Note ID Missing",
+      });
+    }
+    const query = await db.execute(
+      `
+      DELETE FROM notes
+      WHERE id = ? AND user_id = ?
+    `,
+      [noteId, res.locals.user.id]
+    );
+    const result = query[0].affectedRows;
+    if (!result) {
+      return res.status(404).json({
+        status: "ERROR",
+        error: "No Notes Found.",
+      });
+    }
+    res.status(200).json({
+      status: "OK",
+    });
   } catch (err) {
     console.log(err);
+    res.status(500).json({
+      status: "ERROR",
+      error: "Internal Server Error.",
+    });
   }
 };
